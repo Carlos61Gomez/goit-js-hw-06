@@ -1,3 +1,7 @@
+*{
+  list-style: none;
+
+}
 .valid {
     border-color: green;
   }
@@ -20,4 +24,16 @@
 
   #text {
     font-size: 20px;
+  }
+
+
+  .gallery {
+   
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .gallery li {
+    margin: 10px;
   }
