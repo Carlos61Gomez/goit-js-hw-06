@@ -1,33 +1,50 @@
+
+// Obtener el elemento ul#categories
+const categoriesList = document.querySelector('#categories');
+
+// Obtener todos los elementos li.item dentro de ul#categories
+const items = categoriesList.querySelectorAll('li.item');
+
+// Contar y mostrar el número de categorías
+console.log(`Número de categorías: ${items.length}`);
+
+// Recorrer cada elemento li.item
+items.forEach((item) => {
+  // Obtener el título del artículo (tag <h2>)
+  const title = item.querySelector('h2').textContent;
+
+  // Obtener el número de artículos en la categoría (todos los elementos <li> anidados)
+  const articleCount = item.querySelectorAll('li').length;
+
+  // Mostrar el título del artículo y el número de artículos en la categoría
+  console.log(`Título del artículo: ${title}`);
+  console.log(`Número de artículos en la categoría: ${articleCount}`);
+});
+
+
 const ingredients = [
-    "Potatoes",
-    "Mushrooms",
-    "Garlic",
-    "Tomatos",
-    "Herbs",
-    "Condiments",
-  ];
+  "Potatoes",
+  "Mushrooms",
+  "Garlic",
+  "Tomatos",
+  "Herbs",
+  "Condiments",
+];
 
+// Obtener el elemento ul#ingredients
+const ingredientsList = document.querySelector('#ingredients');
 
-
-
-  // Selección de la lista de categorías por su id
-const categoriesList = document.getElementById("categories");
-
-// Contar el número de categorías (elementos li.item)
-const categorias = categoriesList.getElementsByClassName("item");
-console.log("Número de categorías:", categorias.length);
-
-// Iterar sobre cada categoría y mostrar el título y el número de artículos
-for (let i = 0; i < categorias.length; i++) {
-  const categoria = categorias[i];
-  const titulo = categoria.querySelector("h2").textContent;
-  const numArticulos = categoria.querySelectorAll("ul li").length;
-  console.log("Categoría:", titulo);
-  console.log("Número de artículos:", numArticulos);
-}
-
-
-
+// Recorrer el array de ingredientes y generar los elementos de la lista
+ingredients.forEach((ingredient) => {
+  // Crear un elemento li
+  const listItem = document.createElement('li');
+  
+  // Establecer el texto del elemento li
+  listItem.textContent = ingredient;
+  
+  // Agregar el elemento li a la lista ul
+  ingredientsList.appendChild(listItem);
+});
 
 
 
@@ -147,3 +164,63 @@ loginForm.addEventListener('submit', function(event) {
   console.log(formData);
   loginForm.reset();
 });
+
+
+
+function getRandomHexColor() {
+  return `#${Math.floor(Math.random() * 16777215)
+    .toString(16)
+    .padStart(6, '0')}`;
+}
+
+const button = document.querySelector('.change-color');
+const colorSpan = document.querySelector('.color');
+
+button.addEventListener('click', function() {
+  const randomColor = getRandomHexColor();
+  document.body.style.backgroundColor = randomColor;
+  colorSpan.textContent = randomColor;
+}); 
+
+
+
+
+function getRandomHexColor() {
+  return `#${Math.floor(Math.random() * 16777215)
+    .toString(16)
+    .padStart(6, '0')}`;
+}
+
+function createBoxes(amount) {
+  const boxesContainer = document.querySelector('#boxes');
+  boxesContainer.innerHTML = '';
+
+  let size = 30;
+
+  for (let i = 0; i < amount; i++) {
+    const box = document.createElement('div');
+    box.style.width = `${size}px`;
+    box.style.height = `${size}px`;
+    box.style.backgroundColor = getRandomHexColor();
+    
+    boxesContainer.appendChild(box);
+    
+    size += 10;
+  }
+}
+
+function destroyBoxes() {
+  const boxesContainer = document.querySelector('#boxes');
+  boxesContainer.innerHTML = '';
+}
+
+const createButton = document.querySelector('[data-create]');
+const destroyButton = document.querySelector('[data-destroy]');
+const input = document.querySelector('input[type="number"]');
+
+createButton.addEventListener('click', function() {
+  const amount = parseInt(input.value);
+  createBoxes(amount);
+});
+
+destroyButton.addEventListener('click', destroyBoxes);
